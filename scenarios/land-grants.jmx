@@ -516,7 +516,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
           <collectionProp name="Arguments.arguments">
             <elementProp name="BaseURL" elementType="Argument">
               <stringProp name="Argument.name">BaseURL</stringProp>
-              <stringProp name="Argument.value">grants-ui.dev.cdp-int.defra.cloud</stringProp>
+              <stringProp name="Argument.value">grants-ui.perf-test.cdp-int.defra.cloud</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="AgmntDevURL" elementType="Argument">
@@ -639,7 +639,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
           </hashTree>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /agreement">
-          <stringProp name="HTTPSampler.domain">${AgmntDevURL}</stringProp>
+          <stringProp name="HTTPSampler.domain">${BaseURL}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">agreement/${agreementID}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -652,7 +652,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST/AgreementReviewAcceptOffer">
-          <stringProp name="HTTPSampler.domain">${AgmntDevURL}</stringProp>
+          <stringProp name="HTTPSampler.domain">${BaseURL}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">agreement/${agreementID}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -665,7 +665,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST/AgreementOfferAccepted">
-          <stringProp name="HTTPSampler.domain">${AgmntDevURL}</stringProp>
+          <stringProp name="HTTPSampler.domain">${BaseURL}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">agreement/${agreementID}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -686,7 +686,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /Viewagreement">
-          <stringProp name="HTTPSampler.domain">${AgmntDevURL}</stringProp>
+          <stringProp name="HTTPSampler.domain">${BaseURL}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">agreement/${agreementID}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -810,7 +810,7 @@ JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalRes
         <stringProp name="filename">report.csv</stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
