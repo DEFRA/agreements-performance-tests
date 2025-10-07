@@ -37,30 +37,13 @@
           </elementProp>
           <elementProp name="csv_path" elementType="Argument">
             <stringProp name="Argument.name">csv_path</stringProp>
-            <stringProp name="Argument.value">${__P(csv)}</stringProp>
-            <stringProp name="Argument.desc">set to ${__P(csv)} by default</stringProp>
+            <stringProp name="Argument.value">${__P(csv_path)}</stringProp>
+            <stringProp name="Argument.desc">set to ${__P(csv_path)} by default</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="BASE_URL_1" elementType="Argument">
             <stringProp name="Argument.name">BASE_URL_1</stringProp>
             <stringProp name="Argument.value">grants-ui.perf-test.cdp-int.defra.cloud</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="environment" elementType="Argument">
-            <stringProp name="Argument.name">environment</stringProp>
-            <stringProp name="Argument.value">${__P(env)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">set to ${__P(env)} by default </stringProp>
-          </elementProp>
-          <elementProp name="csv_path" elementType="Argument">
-            <stringProp name="Argument.name">csv_path</stringProp>
-            <stringProp name="Argument.value">${__P(csv_path)}</stringProp>
-            <stringProp name="Argument.desc">set to ${__P(csv_path)} by default</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
