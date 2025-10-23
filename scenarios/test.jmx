@@ -48,7 +48,7 @@
           </elementProp>
           <elementProp name="user_count" elementType="Argument">
             <stringProp name="Argument.name">user_count</stringProp>
-            <stringProp name="Argument.value">${__P(user_count,5)}</stringProp>
+            <stringProp name="Argument.value">${__P(user_count)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
