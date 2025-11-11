@@ -267,6 +267,7 @@ synchronized (lock) {
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.path">/agreement/</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -281,13 +282,6 @@ synchronized (lock) {
                   <stringProp name="Argument.value">display-accept</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="crumb" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">${CRUMB}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">crumb</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -316,6 +310,7 @@ synchronized (lock) {
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.path">/agreement/</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -330,13 +325,6 @@ synchronized (lock) {
                   <stringProp name="Argument.value">accept-offer</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="crumb" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">${CRUMB}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">crumb</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -365,6 +353,7 @@ synchronized (lock) {
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/view-agreement">
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
             <stringProp name="HTTPSampler.path">/agreement/${agreementNumber}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -379,13 +368,6 @@ synchronized (lock) {
                   <stringProp name="Argument.value">view-agreement</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="crumb" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">${CRUMB}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">crumb</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
