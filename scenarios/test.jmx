@@ -31,29 +31,19 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="environment" elementType="Argument">
             <stringProp name="Argument.name">environment</stringProp>
-            <stringProp name="Argument.value">${__P(env)}</stringProp>
+            <stringProp name="Argument.value">${__P(env, perf-test)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">set to ${__P(env)} by default </stringProp>
+            <stringProp name="Argument.desc"></stringProp>
           </elementProp>
           <elementProp name="defra_id__stub_url" elementType="Argument">
             <stringProp name="Argument.name">defra_id__stub_url</stringProp>
             <stringProp name="Argument.value">fcp-defra-id-stub.${__P(env, perf-test)}.cdp-int.defra.cloud</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="api_base_url" elementType="Argument">
-            <stringProp name="Argument.name">api_base_url</stringProp>
-            <stringProp name="Argument.value">land-grants-api.${__P(env, perf-test)}.cdp-int.defra.cloud</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="csv_path" elementType="Argument">
             <stringProp name="Argument.name">csv_path</stringProp>
-            <stringProp name="Argument.value">${__P(csv_path)}</stringProp>
-            <stringProp name="Argument.desc">set to ${__P(csv_path)} by default</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="BASE_URL_1" elementType="Argument">
-            <stringProp name="Argument.name">BASE_URL_1</stringProp>
-            <stringProp name="Argument.value">grants-ui.perf-test.cdp-int.defra.cloud</stringProp>
+            <stringProp name="Argument.value">${__P(csv_path)} </stringProp>
+            <stringProp name="Argument.desc"></stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="user_count" elementType="Argument">
@@ -71,10 +61,45 @@
             <stringProp name="Argument.value">${__P(duration_seconds,60)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="agreements_api_url" elementType="Argument">
+            <stringProp name="Argument.name">agreements_api_url</stringProp>
+            <stringProp name="Argument.value">farming-grants-agreements-api.perf-test.cdp-int.defra.cloud</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
+          <elementProp name="agreements_api_endpoint" elementType="Argument">
+            <stringProp name="Argument.name">agreements_api_endpoint</stringProp>
+            <stringProp name="Argument.value">/api/test/queue-message</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group" enabled="false">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables to run tests locally" enabled="false">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="csv_path" elementType="Argument">
+            <stringProp name="Argument.name">csv_path</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="agreements_api_url" elementType="Argument">
+            <stringProp name="Argument.name">agreements_api_url</stringProp>
+            <stringProp name="Argument.value">ephemeral-protected.api.perf-test.cdp-int.defra.cloud</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
+          <elementProp name="agreements_api_endpoint" elementType="Argument">
+            <stringProp name="Argument.name">agreements_api_endpoint</stringProp>
+            <stringProp name="Argument.value">/farming-grants-agreements-api/api/test/queue-message</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -98,7 +123,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui">
         <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${ramp_up_period_seconds}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">{ramp_up_period_seconds}</stringProp>
         <stringProp name="ThreadGroup.duration">${duration_seconds}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -114,392 +139,6 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
         </ConstantTimer>
         <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
-          <stringProp name="HTTPSampler.domain">${grants_ui_base_url}</stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-        </ConfigTestElement>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Land Parcels CSV">
-          <stringProp name="filename">${csv_path}/crns_and_land_parcels.csv</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="variableNames">crn,password,sbi,land_parcel,action,available_area,agreementNumber</stringProp>
-          <boolProp name="ignoreFirstLine">true</boolProp>
-          <stringProp name="delimiter">,</stringProp>
-          <boolProp name="quotedData">true</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
-          <stringProp name="delimiter">,</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="filename">${csv_path}/testdata.csv</stringProp>
-          <boolProp name="ignoreFirstLine">true</boolProp>
-          <boolProp name="quotedData">true</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="variableNames">agreementNumber</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="script">// config
-long maxResponseTimeMs = 3000L
-long minimumSampleSize = 10L
-
-// skip Defra ID stub requests
-if (prev.getSampleLabel().contains(&quot;Defra Id stub&quot;) || prev.getSampleLabel().contains(&quot;Clear Application State&quot;)) {
-	return
-}
-
-// accumulate request count and response times
-def lock = &apos;accumulationLock&apos;.intern()
-synchronized (lock) {
-	// get response time
-	long responseTime = prev.getTime()
-	log.info(&apos;Individual response time: &apos; + responseTime + &apos; ms&apos;)
-
-	// update counters
-	long accumulatedRequestCount = (props.getProperty(&apos;accumulatedRequestCount&apos;,&apos;0&apos;) as long) + 1L
-	long accumulatedResponseTimeMs = (props.getProperty(&apos;accumulatedResponseTimeMs&apos;,&apos;0&apos;) as long) + responseTime
-	props.setProperty(&apos;accumulatedRequestCount&apos;,   String.valueOf(accumulatedRequestCount))
-	props.setProperty(&apos;accumulatedResponseTimeMs&apos;, String.valueOf(accumulatedResponseTimeMs))
-
-	// calculate latest average response time
-	long averageResponseTimeMs = accumulatedResponseTimeMs / accumulatedRequestCount
-	log.info(&apos;Average response time is now: &apos; + averageResponseTimeMs + &apos; ms over &apos; + accumulatedRequestCount + &apos; requests&apos;)
-
-	// assert
-	if (accumulatedRequestCount &gt; minimumSampleSize &amp;&amp; averageResponseTimeMs &gt; maxResponseTimeMs) {
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(&apos;Average response time exceeds &apos; + maxResponseTimeMs + &apos; ms threshold&apos;)
-	}
-}
-</stringProp>
-        </JSR223Assertion>
-        <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Test">
-          <boolProp name="TransactionController.includeTimers">false</boolProp>
-        </TransactionController>
-        <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Start Page">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.path">/farm-payments</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Defra Id stub Login Page">
-            <stringProp name="HTTPSampler.domain">${defra_id__stub_url}</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/dcidmtest.onmicrosoft.com/oauth2/authresp</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="crn" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${crn}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">crn</stringProp>
-                </elementProp>
-                <elementProp name="password" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${password}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">password</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Clear Application State" enabled="false">
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/farm-payments/clear-application-state</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Extract crumb" enabled="true">
-              <stringProp name="XPathExtractor.default"></stringProp>
-              <stringProp name="XPathExtractor.refname">CRUMB</stringProp>
-              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-              <stringProp name="XPathExtractor.xpathQuery">//input[@name=&apos;crumb&apos;]/@value</stringProp>
-              <boolProp name="XPathExtractor.validate">false</boolProp>
-              <boolProp name="XPathExtractor.tolerant">true</boolProp>
-              <boolProp name="XPathExtractor.namespace">false</boolProp>
-            </XPathExtractor>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-offer">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port">0</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="49586">200</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
-              <intProp name="Assertion.test_type">34</intProp>
-            </ResponseAssertion>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="-1558839308">Review your funding offer</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
-              <intProp name="Assertion.test_type">2</intProp>
-              <stringProp name="Scope.variable">pageTitle</stringProp>
-            </ResponseAssertion>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="action" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">action</stringProp>
-                  <stringProp name="Argument.value">display-accept</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="49586">200</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
-              <intProp name="Assertion.test_type">34</intProp>
-            </ResponseAssertion>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="184982055">Accept your offer</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
-              <intProp name="Assertion.test_type">2</intProp>
-              <stringProp name="Scope.variable">pageTitle</stringProp>
-            </ResponseAssertion>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="action" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">action</stringProp>
-                  <stringProp name="Argument.value">accept-offer</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="49586">200</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
-              <intProp name="Assertion.test_type">34</intProp>
-            </ResponseAssertion>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="1543051531">Offer accepted</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
-              <intProp name="Assertion.test_type">2</intProp>
-              <stringProp name="Scope.variable">pageTitle</stringProp>
-            </ResponseAssertion>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/view-agreement">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="agreementNumber" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">${agreementNumber}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">agreementNumber</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="49586">200</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
-              <intProp name="Assertion.test_type">34</intProp>
-            </ResponseAssertion>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="-2105744047">Single business identifier</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.custom_message"></stringProp>
-              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
-              <intProp name="Assertion.test_type">2</intProp>
-              <stringProp name="Scope.variable">pageTitle</stringProp>
-            </ResponseAssertion>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Clear Application State" enabled="false">
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/farm-payments/clear-application-state</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree/>
-        </hashTree>
-      </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreement-ui" enabled="false">
-        <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
-        <intProp name="ThreadGroup.ramp_time">10</intProp>
-        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
-          <stringProp name="LoopController.loops">1</stringProp>
-          <boolProp name="LoopController.continue_forever">false</boolProp>
-        </elementProp>
-      </ThreadGroup>
-      <hashTree>
-        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Human Interaction Delay">
-          <stringProp name="ConstantTimer.delay">3000</stringProp>
-        </ConstantTimer>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Land Parcels CSV">
-          <stringProp name="filename">${csv_path}/crns_and_land_parcels.csv</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="variableNames">crn,password,sbi</stringProp>
-          <boolProp name="ignoreFirstLine">true</boolProp>
-          <stringProp name="delimiter">,</stringProp>
-          <boolProp name="quotedData">true</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="script">// config
-long maxResponseTimeMs = 3000L
-long minimumSampleSize = 10L
-
-// skip Defra ID stub requests
-if (prev.getSampleLabel().contains(&quot;Defra Id stub&quot;) || prev.getSampleLabel().contains(&quot;Clear Application State&quot;)) {
-	return
-}
-
-// accumulate request count and response times
-def lock = &apos;accumulationLock&apos;.intern()
-synchronized (lock) {
-	// get response time
-	long responseTime = prev.getTime()
-	log.info(&apos;Individual response time: &apos; + responseTime + &apos; ms&apos;)
-
-	// update counters
-	long accumulatedRequestCount = (props.getProperty(&apos;accumulatedRequestCount&apos;,&apos;0&apos;) as long) + 1L
-	long accumulatedResponseTimeMs = (props.getProperty(&apos;accumulatedResponseTimeMs&apos;,&apos;0&apos;) as long) + responseTime
-	props.setProperty(&apos;accumulatedRequestCount&apos;,   String.valueOf(accumulatedRequestCount))
-	props.setProperty(&apos;accumulatedResponseTimeMs&apos;, String.valueOf(accumulatedResponseTimeMs))
-
-	// calculate latest average response time
-	long averageResponseTimeMs = accumulatedResponseTimeMs / accumulatedRequestCount
-	log.info(&apos;Average response time is now: &apos; + averageResponseTimeMs + &apos; ms over &apos; + accumulatedRequestCount + &apos; requests&apos;)
-
-	// assert
-	if (accumulatedRequestCount &gt; minimumSampleSize &amp;&amp; averageResponseTimeMs &gt; maxResponseTimeMs) {
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(&apos;Average response time exceeds &apos; + maxResponseTimeMs + &apos; ms threshold&apos;)
-	}
-}
-</stringProp>
-        </JSR223Assertion>
-        <hashTree/>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
           <stringProp name="HTTPSampler.domain">grants-ui.${environment}.cdp-int.defra.cloud</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
@@ -508,250 +147,548 @@ synchronized (lock) {
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config">
-          <stringProp name="delimiter">,</stringProp>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV">
+          <stringProp name="filename">${csv_path}/crns_with_agreements.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="filename">${csv_path}/testdata.csv</stringProp>
+          <stringProp name="variableNames">crn,password,sbi,agreementNumber</stringProp>
           <boolProp name="ignoreFirstLine">true</boolProp>
+          <stringProp name="delimiter">,</stringProp>
           <boolProp name="quotedData">true</boolProp>
           <boolProp name="recycle">true</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
           <boolProp name="stopThread">false</boolProp>
-          <stringProp name="variableNames">agreementNumber</stringProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-          <collectionProp name="Asserion.test_strings">
-            <stringProp name="49586">200</stringProp>
-          </collectionProp>
-          <stringProp name="Assertion.custom_message"></stringProp>
-          <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-          <boolProp name="Assertion.assume_success">false</boolProp>
-          <intProp name="Assertion.test_type">34</intProp>
-        </ResponseAssertion>
-        <hashTree/>
-        <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Maximum Response Time Assertion">
-          <stringProp name="DurationAssertion.duration">3000</stringProp>
-        </DurationAssertion>
-        <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Average Response Time Assertion">
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
+          <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
-          <stringProp name="script">import org.apache.jmeter.util.JMeterUtils;
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">// config
+long maxResponseTimeMs = 3000L
+long minimumSampleSize = 10L
 
-long thresholdMs = 3000;
-long minimumSampleSize = 50;
-long requestCount = JMeterUtils.getPropDefault(&quot;requestCount&quot;, 0);
-long totalResponseTimeMs = JMeterUtils.getPropDefault(&quot;totalResponseTimeMs&quot;, 0);
-
-requestCount++;
-totalResponseTimeMs += SampleResult.getTime();
-
-long averageResponseTimeMs = totalResponseTimeMs / requestCount;
-
-if (requestCount &gt;= minimumSampleSize) {
-    if (averageResponseTimeMs &gt; thresholdMs) {
-        AssertionResult.setFailure(true);
-        AssertionResult.setFailureMessage(&quot;Average response time &quot; + averageResponseTimeMs + &quot; ms exceeds threshold &quot; + thresholdMs + &quot; ms&quot;);
-    }
-    
-    log.info(&quot;Average response time after &quot; + requestCount + &quot; requests: &quot; + averageResponseTimeMs + &quot; ms&quot;);
+// skip Defra ID stub requests
+if (prev.getSampleLabel().contains(&quot;Defra Id stub&quot;) || prev.getSampleLabel().contains(&quot;create agreement&quot;)) {
+	return
 }
 
-JMeterUtils.setProperty(&quot;requestCount&quot;, String.valueOf(requestCount));
-JMeterUtils.setProperty(&quot;totalResponseTimeMs&quot;, String.valueOf(totalResponseTimeMs));</stringProp>
-          <stringProp name="scriptLanguage">groovy</stringProp>
+// accumulate request count and response times
+def lock = &apos;accumulationLock&apos;.intern()
+synchronized (lock) {
+	// get response time
+	long responseTime = prev.getTime()
+	log.info(&apos;Individual response time: &apos; + responseTime + &apos; ms&apos;)
+
+	// update counters
+	long accumulatedRequestCount = (props.getProperty(&apos;accumulatedRequestCount&apos;,&apos;0&apos;) as long) + 1L
+	long accumulatedResponseTimeMs = (props.getProperty(&apos;accumulatedResponseTimeMs&apos;,&apos;0&apos;) as long) + responseTime
+	props.setProperty(&apos;accumulatedRequestCount&apos;,   String.valueOf(accumulatedRequestCount))
+	props.setProperty(&apos;accumulatedResponseTimeMs&apos;, String.valueOf(accumulatedResponseTimeMs))
+
+	// calculate latest average response time
+	long averageResponseTimeMs = accumulatedResponseTimeMs / accumulatedRequestCount
+	log.info(&apos;Average response time is now: &apos; + averageResponseTimeMs + &apos; ms over &apos; + accumulatedRequestCount + &apos; requests&apos;)
+
+	// assert
+	if (accumulatedRequestCount &gt; minimumSampleSize &amp;&amp; averageResponseTimeMs &gt; maxResponseTimeMs) {
+		AssertionResult.setFailure(true);
+		AssertionResult.setFailureMessage(&apos;Average response time exceeds &apos; + maxResponseTimeMs + &apos; ms threshold&apos;)
+	}
+}
+</stringProp>
         </JSR223Assertion>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Test">
-          <boolProp name="TransactionController.includeTimers">false</boolProp>
-        </TransactionController>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Start Page">
+          <stringProp name="HTTPSampler.path">/agreement</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Defra Id stub Login Page">
+          <stringProp name="HTTPSampler.domain">${defra_id__stub_url}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dcidmtest.onmicrosoft.com/oauth2/authresp</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="crn" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${crn}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">crn</stringProp>
+              </elementProp>
+              <elementProp name="password" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${password}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">password</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create agreement">
+          <stringProp name="HTTPSampler.domain">${agreements_api_url}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">${agreements_api_endpoint}</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;id&quot;: &quot;12-34-56-78-90&quot;,&#xd;
+    &quot;source&quot;: &quot;fg-gas-backend&quot;,&#xd;
+    &quot;specVersion&quot;: &quot;1.0&quot;,&#xd;
+    &quot;type&quot;: &quot;cloud.defra.perf-test.fg-gas-backend.agreement.create&quot;,&#xd;
+    &quot;datacontenttype&quot;: &quot;application/json&quot;,&#xd;
+    &quot;data&quot;: {&#xd;
+        &quot;clientRef&quot;: &quot;79c-7c5-69d&quot;,&#xd;
+        &quot;code&quot;: &quot;frps-private-beta&quot;,&#xd;
+        &quot;createdAt&quot;: &quot;2025-08-19T09:36:45.131Z&quot;,&#xd;
+        &quot;submittedAt&quot;: &quot;2025-08-19T09:36:44.509Z&quot;,&#xd;
+        &quot;identifiers&quot;: {&#xd;
+            &quot;sbi&quot;: &quot;${sbi}&quot;,&#xd;
+            &quot;frn&quot;: &quot;frn&quot;,&#xd;
+            &quot;crn&quot;: &quot;${crn}&quot;,&#xd;
+            &quot;defraId&quot;: &quot;defraId&quot;&#xd;
+        },&#xd;
+        &quot;answers&quot;: {&#xd;
+            &quot;hasCheckedLandIsUpToDate&quot;: true,&#xd;
+            &quot;agreementName&quot;: &quot;NO_LONGER_REQUIRED&quot;,&#xd;
+            &quot;scheme&quot;: &quot;SFI&quot;,&#xd;
+            &quot;year&quot;: 2025,&#xd;
+            &quot;actionApplications&quot;: [&#xd;
+                {&#xd;
+                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                    &quot;sheetId&quot;: &quot;SD6743&quot;,&#xd;
+                    &quot;parcelId&quot;: &quot;8083&quot;,&#xd;
+                    &quot;appliedFor&quot;: {&#xd;
+                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                        &quot;quantity&quot;: 4.53411078&#xd;
+                    }&#xd;
+                }&#xd;
+            ],&#xd;
+            &quot;payment&quot;: {&#xd;
+                &quot;agreementStartDate&quot;: &quot;2025-09-01&quot;,&#xd;
+                &quot;agreementEndDate&quot;: &quot;2028-09-01&quot;,&#xd;
+                &quot;frequency&quot;: &quot;Quarterly&quot;,&#xd;
+                &quot;agreementTotalPence&quot;: 96018,&#xd;
+                &quot;annualTotalPence&quot;: 32007,&#xd;
+                &quot;parcelItems&quot;: {&#xd;
+                    &quot;1&quot;: {&#xd;
+                        &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                        &quot;description&quot;: &quot;CMOR1: Assess moorland and produce a written record&quot;,&#xd;
+                        &quot;version&quot;: 1,&#xd;
+                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                        &quot;quantity&quot;: 4.53411078,&#xd;
+                        &quot;rateInPence&quot;: 1060,&#xd;
+                        &quot;annualPaymentPence&quot;: 4806,&#xd;
+                        &quot;sheetId&quot;: &quot;SD6743&quot;,&#xd;
+                        &quot;parcelId&quot;: &quot;8083&quot;&#xd;
+                    }&#xd;
+                },&#xd;
+                &quot;agreementLevelItems&quot;: {&#xd;
+                    &quot;1&quot;: {&#xd;
+                        &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                        &quot;description&quot;: &quot;CMOR1: Assess moorland and produce a written record&quot;,&#xd;
+                        &quot;version&quot;: 1,&#xd;
+                        &quot;annualPaymentPence&quot;: 33142&#xd;
+                    }&#xd;
+                },&#xd;
+                &quot;payments&quot;: [&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8007,&#xd;
+                        &quot;paymentDate&quot;: &quot;2025-12-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2026-03-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2026-06-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2026-09-07&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2026-12-07&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2027-03-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2027-06-07&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2027-09-06&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2027-12-06&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2028-03-06&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2028-06-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                        &quot;totalPaymentPence&quot;: 8001,&#xd;
+                        &quot;paymentDate&quot;: &quot;2028-09-05&quot;,&#xd;
+                        &quot;lineItems&quot;: [&#xd;
+                            {&#xd;
+                                &quot;parcelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 1201&#xd;
+                            },&#xd;
+                            {&#xd;
+                                &quot;agreementLevelItemId&quot;: 1,&#xd;
+                                &quot;paymentPence&quot;: 6800&#xd;
+                            }&#xd;
+                        ]&#xd;
+                    }&#xd;
+                ]&#xd;
+            },&#xd;
+            &quot;applicant&quot;: {&#xd;
+                &quot;business&quot;: {&#xd;
+                    &quot;name&quot;: &quot;J&amp;S Hartley&quot;,&#xd;
+                    &quot;email&quot;: {&#xd;
+                        &quot;address&quot;: &quot;cliffspencetasabbeyfarmf@mrafyebbasatecnepsffilcm.com.test&quot;&#xd;
+                    },&#xd;
+                    &quot;phone&quot;: {&#xd;
+                        &quot;mobile&quot;: &quot;01234031670&quot;&#xd;
+                    },&#xd;
+                    &quot;address&quot;: {&#xd;
+                        &quot;line1&quot;: &quot;Mason House Farm Clitheroe Rd&quot;,&#xd;
+                        &quot;line2&quot;: &quot;Bashall Eaves&quot;,&#xd;
+                        &quot;line3&quot;: null,&#xd;
+                        &quot;line4&quot;: null,&#xd;
+                        &quot;line5&quot;: null,&#xd;
+                        &quot;street&quot;: &quot;Bartindale Road&quot;,&#xd;
+                        &quot;city&quot;: &quot;Clitheroe&quot;,&#xd;
+                        &quot;postalCode&quot;: &quot;BB7 3DD&quot;&#xd;
+                    }&#xd;
+                },&#xd;
+                &quot;customer&quot;: {&#xd;
+                    &quot;name&quot;: {&#xd;
+                        &quot;title&quot;: &quot;Mr.&quot;,&#xd;
+                        &quot;first&quot;: &quot;Edward&quot;,&#xd;
+                        &quot;middle&quot;: &quot;Paul&quot;,&#xd;
+                        &quot;last&quot;: &quot;Jones&quot;&#xd;
+                    }&#xd;
+                }&#xd;
+            }&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-offer">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port">0</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">none</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-            </ConstantTimer>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port">0</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="action" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">action</stringProp>
-                  <stringProp name="Argument.value">display-accept</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-origin</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-            </ConstantTimer>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port">0</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="action" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">action</stringProp>
-                  <stringProp name="Argument.value">accept-offer</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-origin</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-            </ConstantTimer>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/view-agreement">
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port">0</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.path">/agreement/${agreementNumber}</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="action" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">action</stringProp>
-                  <stringProp name="Argument.value">view-agreement</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="Sec-Fetch-Site" elementType="Header">
-                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
-                  <stringProp name="Header.value">same-origin</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-            </ConstantTimer>
-            <hashTree/>
-          </hashTree>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <url>true</url>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager to use when running locally" enabled="false">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">x-api-key</stringProp>
+                <stringProp name="Header.value"></stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Accept-Encoding</stringProp>
+                <stringProp name="Header.value">*</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-offer">
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.path">/agreement</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">34</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1558839308">Review your funding offer</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Scope.variable">pageTitle</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
+          <stringProp name="HTTPSampler.path">/agreement</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="action" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">action</stringProp>
+                <stringProp name="Argument.value">display-accept</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">34</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="184982055">Accept your offer</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Scope.variable">pageTitle</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
+          <stringProp name="HTTPSampler.path">/agreement</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="action" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">action</stringProp>
+                <stringProp name="Argument.value">accept-offer</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">34</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1543051531">Offer accepted</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Scope.variable">pageTitle</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/view-agreement">
+          <stringProp name="HTTPSampler.path">/agreement/${agreementNumber}</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">34</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="922667969">${agreementNumber}</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Scope.variable">pageTitle</stringProp>
+          </ResponseAssertion>
           <hashTree/>
         </hashTree>
       </hashTree>
