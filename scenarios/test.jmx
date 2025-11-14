@@ -29,7 +29,7 @@
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="environment" elementType="Argument">
             <stringProp name="Argument.name">environment</stringProp>
@@ -101,7 +101,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -123,7 +123,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${ramp_up_period_seconds}</stringProp>
         <stringProp name="ThreadGroup.duration">${duration_seconds}</stringProp>
@@ -149,7 +149,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV" enabled="true">
           <stringProp name="filename">${csv_path}/agreements.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="variableNames">crn,password,sbi,agreementNumber</stringProp>
@@ -161,7 +161,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -201,7 +201,7 @@ synchronized (lock) {
 </stringProp>
         </JSR223Assertion>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create agreement">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create agreement" enabled="true">
           <stringProp name="HTTPSampler.domain">${agreements_api_url}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">${agreements_api_endpoint}</stringProp>
@@ -495,7 +495,7 @@ synchronized (lock) {
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
@@ -504,7 +504,7 @@ synchronized (lock) {
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -515,7 +515,7 @@ synchronized (lock) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Start Page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Start Page" enabled="true">
           <stringProp name="HTTPSampler.path">/agreement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -526,7 +526,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Defra Id stub Login Page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Defra Id stub Login Page" enabled="true">
           <stringProp name="HTTPSampler.domain">${defra_id__stub_url}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/dcidmtest.onmicrosoft.com/oauth2/authresp</stringProp>
@@ -554,7 +554,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-your-offer">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-your-offer" enabled="true">
           <stringProp name="HTTPSampler.path">/agreement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -565,7 +565,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -575,7 +575,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-1558839308">Review your funding offer</stringProp>
             </collectionProp>
@@ -606,7 +606,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -618,7 +618,7 @@ synchronized (lock) {
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="184982055">Accept your offer</stringProp>
+              <stringProp name="-1366634799">Accept your agreement offer</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -647,7 +647,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -657,7 +657,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="1543051531">Offer accepted</stringProp>
             </collectionProp>
@@ -669,7 +669,7 @@ synchronized (lock) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/view-agreement">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/view-agreement" enabled="true">
           <stringProp name="HTTPSampler.path">/agreement/${agreementNumber}</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -680,7 +680,7 @@ synchronized (lock) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -690,7 +690,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="922667969">${agreementNumber}</stringProp>
             </collectionProp>
@@ -703,7 +703,7 @@ synchronized (lock) {
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -740,7 +740,7 @@ synchronized (lock) {
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
