@@ -125,7 +125,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui">
         <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
-        <intProp name="ThreadGroup.ramp_time">3600</intProp>
+        <stringProp name="ThreadGroup.ramp_time">${ramp_up_period_seconds}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
