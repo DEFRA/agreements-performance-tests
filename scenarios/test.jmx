@@ -29,7 +29,7 @@
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments">
           <elementProp name="environment" elementType="Argument">
             <stringProp name="Argument.name">environment</stringProp>
@@ -101,7 +101,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -112,7 +112,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler">
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -140,7 +140,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="ConstantTimer.delay">3000</stringProp>
         </ConstantTimer>
         <hashTree/>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
           <stringProp name="HTTPSampler.domain">grants-ui.${environment}.cdp-int.defra.cloud</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
@@ -149,7 +149,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV">
           <stringProp name="filename">${csv_path}/agreements.csv</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="variableNames">crn,password,sbi,agreementNumber</stringProp>
@@ -161,7 +161,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion" enabled="true">
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -201,7 +201,7 @@ synchronized (lock) {
 </stringProp>
         </JSR223Assertion>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create agreement" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post create agreement">
           <stringProp name="HTTPSampler.domain">${agreements_api_url}</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">${agreements_api_endpoint}</stringProp>
@@ -214,268 +214,218 @@ synchronized (lock) {
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-    &quot;id&quot;: &quot;12-34-56-78-90&quot;,&#xd;
-    &quot;source&quot;: &quot;fg-gas-backend&quot;,&#xd;
-    &quot;specVersion&quot;: &quot;1.0&quot;,&#xd;
-    &quot;type&quot;: &quot;cloud.defra.perf-test.fg-gas-backend.agreement.create&quot;,&#xd;
-    &quot;datacontenttype&quot;: &quot;application/json&quot;,&#xd;
-    &quot;data&quot;: {&#xd;
-        &quot;clientRef&quot;: &quot;79c-7c5-69d&quot;,&#xd;
-        &quot;code&quot;: &quot;frps-private-beta&quot;,&#xd;
-        &quot;createdAt&quot;: &quot;2025-08-19T09:36:45.131Z&quot;,&#xd;
-        &quot;submittedAt&quot;: &quot;2025-08-19T09:36:44.509Z&quot;,&#xd;
-        &quot;identifiers&quot;: {&#xd;
-            &quot;sbi&quot;: &quot;${sbi}&quot;,&#xd;
-            &quot;frn&quot;: &quot;frn&quot;,&#xd;
-            &quot;crn&quot;: &quot;${crn}&quot;,&#xd;
-            &quot;defraId&quot;: &quot;defraId&quot;&#xd;
-        },&#xd;
-        &quot;answers&quot;: {&#xd;
-            &quot;hasCheckedLandIsUpToDate&quot;: true,&#xd;
-            &quot;agreementName&quot;: &quot;NO_LONGER_REQUIRED&quot;,&#xd;
-            &quot;scheme&quot;: &quot;SFI&quot;,&#xd;
-            &quot;year&quot;: 2025,&#xd;
-            &quot;actionApplications&quot;: [&#xd;
-                {&#xd;
-                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                    &quot;sheetId&quot;: &quot;SD6743&quot;,&#xd;
-                    &quot;parcelId&quot;: &quot;8083&quot;,&#xd;
-                    &quot;appliedFor&quot;: {&#xd;
-                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                        &quot;quantity&quot;: 4.53411078&#xd;
-                    }&#xd;
-                }&#xd;
-            ],&#xd;
-            &quot;payment&quot;: {&#xd;
-                &quot;agreementStartDate&quot;: &quot;2025-09-01&quot;,&#xd;
-                &quot;agreementEndDate&quot;: &quot;2028-09-01&quot;,&#xd;
-                &quot;frequency&quot;: &quot;Quarterly&quot;,&#xd;
-                &quot;agreementTotalPence&quot;: 96018,&#xd;
-                &quot;annualTotalPence&quot;: 32007,&#xd;
-                &quot;parcelItems&quot;: {&#xd;
-                    &quot;1&quot;: {&#xd;
-                        &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                        &quot;description&quot;: &quot;CMOR1: Assess moorland and produce a written record&quot;,&#xd;
-                        &quot;version&quot;: 1,&#xd;
-                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                        &quot;quantity&quot;: 4.53411078,&#xd;
-                        &quot;rateInPence&quot;: 1060,&#xd;
-                        &quot;annualPaymentPence&quot;: 4806,&#xd;
-                        &quot;sheetId&quot;: &quot;SD6743&quot;,&#xd;
-                        &quot;parcelId&quot;: &quot;8083&quot;&#xd;
-                    }&#xd;
-                },&#xd;
-                &quot;agreementLevelItems&quot;: {&#xd;
-                    &quot;1&quot;: {&#xd;
-                        &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                        &quot;description&quot;: &quot;CMOR1: Assess moorland and produce a written record&quot;,&#xd;
-                        &quot;version&quot;: 1,&#xd;
-                        &quot;annualPaymentPence&quot;: 33142&#xd;
-                    }&#xd;
-                },&#xd;
-                &quot;payments&quot;: [&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8007,&#xd;
-                        &quot;paymentDate&quot;: &quot;2025-12-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2026-03-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2026-06-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2026-09-07&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2026-12-07&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2027-03-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2027-06-07&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2027-09-06&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2027-12-06&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2028-03-06&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2028-06-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    },&#xd;
-                    {&#xd;
-                        &quot;totalPaymentPence&quot;: 8001,&#xd;
-                        &quot;paymentDate&quot;: &quot;2028-09-05&quot;,&#xd;
-                        &quot;lineItems&quot;: [&#xd;
-                            {&#xd;
-                                &quot;parcelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 1201&#xd;
-                            },&#xd;
-                            {&#xd;
-                                &quot;agreementLevelItemId&quot;: 1,&#xd;
-                                &quot;paymentPence&quot;: 6800&#xd;
-                            }&#xd;
-                        ]&#xd;
-                    }&#xd;
-                ]&#xd;
+        &quot;id&quot;: &quot;3a877fc7-923e-42a9-b751-6e1a0add2235&quot;,&#xd;
+        &quot;source&quot;: &quot;fg-gas-backend&quot;,&#xd;
+        &quot;specversion&quot;: &quot;1.0&quot;,&#xd;
+        &quot;datacontenttype&quot;: &quot;application/json&quot;,&#xd;
+        &quot;time&quot;: &quot;2025-11-25T15:58:27.496Z&quot;,&#xd;
+        &quot;traceparent&quot;: &quot;c335f29d2d4455947fd4047bd3353f67&quot;,&#xd;
+        &quot;type&quot;: &quot;cloud.defra.perf-test.fg-gas-backend.agreement.create&quot;,&#xd;
+        &quot;data&quot;: {&#xd;
+            &quot;clientRef&quot;: &quot;clientcoc0u82x&quot;,&#xd;
+            &quot;code&quot;: &quot;frps-private-beta&quot;,&#xd;
+            &quot;identifiers&quot;: {&#xd;
+                &quot;sbi&quot;: &quot;${sbi}&quot;,&#xd;
+                &quot;frn&quot;: &quot;frn&quot;,&#xd;
+                &quot;crn&quot;: &quot;${crn}&quot;,&#xd;
+                &quot;defraId&quot;: &quot;12345678910&quot;&#xd;
             },&#xd;
-            &quot;applicant&quot;: {&#xd;
-                &quot;business&quot;: {&#xd;
-                    &quot;name&quot;: &quot;J&amp;S Hartley&quot;,&#xd;
-                    &quot;email&quot;: {&#xd;
-                        &quot;address&quot;: &quot;cliffspencetasabbeyfarmf@mrafyebbasatecnepsffilcm.com.test&quot;&#xd;
+            &quot;answers&quot;: {&#xd;
+                &quot;rulesCalculations&quot;: {&#xd;
+                    &quot;id&quot;: 2979,&#xd;
+                    &quot;message&quot;: &quot;Application validated successfully&quot;,&#xd;
+                    &quot;valid&quot;: true,&#xd;
+                    &quot;date&quot;: &quot;2025-11-21T10:10:43.673Z&quot;&#xd;
+                },&#xd;
+                &quot;scheme&quot;: &quot;SFI&quot;,&#xd;
+                &quot;applicant&quot;: {&#xd;
+                    &quot;business&quot;: {&#xd;
+                        &quot;reference&quot;: &quot;1101091126&quot;,&#xd;
+                        &quot;email&quot;: {&#xd;
+                            &quot;address&quot;: &quot;texelshirecontractingg@gnitcartnocerihslexeto.com.test&quot;&#xd;
+                        },&#xd;
+                        &quot;phone&quot;: {&#xd;
+                            &quot;mobile&quot;: &quot;01234816251&quot;&#xd;
+                        },&#xd;
+                        &quot;name&quot;: &quot;Texels Hire &amp; Contracting&quot;,&#xd;
+                        &quot;address&quot;: {&#xd;
+                            &quot;line1&quot;: &quot;Benbrigge House&quot;,&#xd;
+                            &quot;line2&quot;: &quot;ALBRIGHTON&quot;,&#xd;
+                            &quot;line3&quot;: null,&#xd;
+                            &quot;line4&quot;: null,&#xd;
+                            &quot;line5&quot;: null,&#xd;
+                            &quot;street&quot;: &quot;BRIDGE ROAD&quot;,&#xd;
+                            &quot;city&quot;: &quot;GRIMSBY&quot;,&#xd;
+                            &quot;postalCode&quot;: &quot;DY13 0UY&quot;&#xd;
+                        }&#xd;
                     },&#xd;
-                    &quot;phone&quot;: {&#xd;
-                        &quot;mobile&quot;: &quot;01234031670&quot;&#xd;
-                    },&#xd;
-                    &quot;address&quot;: {&#xd;
-                        &quot;line1&quot;: &quot;Mason House Farm Clitheroe Rd&quot;,&#xd;
-                        &quot;line2&quot;: &quot;Bashall Eaves&quot;,&#xd;
-                        &quot;line3&quot;: null,&#xd;
-                        &quot;line4&quot;: null,&#xd;
-                        &quot;line5&quot;: null,&#xd;
-                        &quot;street&quot;: &quot;Bartindale Road&quot;,&#xd;
-                        &quot;city&quot;: &quot;Clitheroe&quot;,&#xd;
-                        &quot;postalCode&quot;: &quot;BB7 3DD&quot;&#xd;
+                    &quot;customer&quot;: {&#xd;
+                        &quot;name&quot;: {&#xd;
+                            &quot;title&quot;: &quot;Mr&quot;,&#xd;
+                            &quot;first&quot;: &quot;Graham&quot;,&#xd;
+                            &quot;middle&quot;: &quot;Lisa&quot;,&#xd;
+                            &quot;last&quot;: &quot;Gilfoyle&quot;&#xd;
+                        }&#xd;
                     }&#xd;
                 },&#xd;
-                &quot;customer&quot;: {&#xd;
-                    &quot;name&quot;: {&#xd;
-                        &quot;title&quot;: &quot;Mr.&quot;,&#xd;
-                        &quot;first&quot;: &quot;Edward&quot;,&#xd;
-                        &quot;middle&quot;: &quot;Paul&quot;,&#xd;
-                        &quot;last&quot;: &quot;Jones&quot;&#xd;
-                    }&#xd;
+                &quot;totalAnnualPaymentPence&quot;: 70284,&#xd;
+                &quot;application&quot;: {&#xd;
+                    &quot;parcel&quot;: [&#xd;
+                        {&#xd;
+                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
+                            &quot;parcelId&quot;: &quot;7555&quot;,&#xd;
+                            &quot;area&quot;: {&#xd;
+                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                &quot;quantity&quot;: 5.2182&#xd;
+                            },&#xd;
+                            &quot;actions&quot;: [&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                                    &quot;version&quot;: 1,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    }&#xd;
+                                },&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;UPL3&quot;,&#xd;
+                                    &quot;version&quot;: 1,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    }&#xd;
+                                }&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
+                            &quot;parcelId&quot;: &quot;9194&quot;,&#xd;
+                            &quot;area&quot;: {&#xd;
+                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                &quot;quantity&quot;: 2.1703&#xd;
+                            },&#xd;
+                            &quot;actions&quot;: [&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                                    &quot;version&quot;: 1,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    }&#xd;
+                                },&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;UPL1&quot;,&#xd;
+                                    &quot;version&quot;: 1,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    }&#xd;
+                                }&#xd;
+                            ]&#xd;
+                        }&#xd;
+                    ],&#xd;
+                    &quot;agreement&quot;: []&#xd;
+                },&#xd;
+                &quot;payments&quot;: {&#xd;
+                    &quot;parcel&quot;: [&#xd;
+                        {&#xd;
+                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
+                            &quot;parcelId&quot;: &quot;7555&quot;,&#xd;
+                            &quot;area&quot;: {&#xd;
+                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                &quot;quantity&quot;: 5.2182&#xd;
+                            },&#xd;
+                            &quot;actions&quot;: [&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                                    &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;paymentRates&quot;: 1060,&#xd;
+                                    &quot;annualPaymentPence&quot;: 5042,&#xd;
+                                    &quot;eligible&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    },&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    }&#xd;
+                                },&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;UPL3&quot;,&#xd;
+                                    &quot;description&quot;: &quot;Limited livestock grazing on moorland&quot;,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;paymentRates&quot;: 6600,&#xd;
+                                    &quot;annualPaymentPence&quot;: 31399,&#xd;
+                                    &quot;eligible&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    },&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 4.7575&#xd;
+                                    }&#xd;
+                                }&#xd;
+                            ]&#xd;
+                        },&#xd;
+                        {&#xd;
+                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
+                            &quot;parcelId&quot;: &quot;9194&quot;,&#xd;
+                            &quot;area&quot;: {&#xd;
+                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                &quot;quantity&quot;: 2.1703&#xd;
+                            },&#xd;
+                            &quot;actions&quot;: [&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                                    &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;paymentRates&quot;: 1060,&#xd;
+                                    &quot;annualPaymentPence&quot;: 2300,&#xd;
+                                    &quot;eligible&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    },&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    }&#xd;
+                                },&#xd;
+                                {&#xd;
+                                    &quot;code&quot;: &quot;UPL1&quot;,&#xd;
+                                    &quot;description&quot;: &quot;Moderate livestock grazing on moorland&quot;,&#xd;
+                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;paymentRates&quot;: 2000,&#xd;
+                                    &quot;annualPaymentPence&quot;: 4341,&#xd;
+                                    &quot;eligible&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    },&#xd;
+                                    &quot;appliedFor&quot;: {&#xd;
+                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
+                                        &quot;quantity&quot;: 2.1705&#xd;
+                                    }&#xd;
+                                }&#xd;
+                            ]&#xd;
+                        }&#xd;
+                    ],&#xd;
+                    &quot;agreement&quot;: [&#xd;
+                        {&#xd;
+                            &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
+                            &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
+                            &quot;durationYears&quot;: 3,&#xd;
+                            &quot;paymentRates&quot;: 27200,&#xd;
+                            &quot;annualPaymentPence&quot;: 27200&#xd;
+                        }&#xd;
+                    ]&#xd;
                 }&#xd;
             }&#xd;
         }&#xd;
-    }&#xd;
-}</stringProp>
+    }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -575,7 +525,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-1549066623">Review your agreement offer</stringProp>
             </collectionProp>
@@ -587,7 +537,7 @@ synchronized (lock) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer" enabled="true">
           <stringProp name="HTTPSampler.path">/agreement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -616,7 +566,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-1366634799">Accept your agreement offer</stringProp>
             </collectionProp>
@@ -628,7 +578,7 @@ synchronized (lock) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted" enabled="true">
           <stringProp name="HTTPSampler.path">/agreement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -657,7 +607,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="1543051531">Offer accepted</stringProp>
             </collectionProp>
@@ -690,7 +640,7 @@ synchronized (lock) {
             <intProp name="Assertion.test_type">34</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="922667969">${agreementNumber}</stringProp>
             </collectionProp>
