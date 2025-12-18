@@ -29,7 +29,7 @@
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="environment" elementType="Argument">
             <stringProp name="Argument.name">environment</stringProp>
@@ -101,7 +101,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -123,7 +123,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${ramp_up_period_seconds}</stringProp>
         <stringProp name="ThreadGroup.duration">${duration_seconds}</stringProp>
@@ -161,7 +161,7 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion">
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -282,7 +282,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
                                     &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;appliedFor&quot;: {&#xd;
                                         &quot;unit&quot;: &quot;ha&quot;,&#xd;
                                         &quot;quantity&quot;: 4.7575&#xd;
@@ -291,7 +291,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;UPL3&quot;,&#xd;
                                     &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;appliedFor&quot;: {&#xd;
                                         &quot;unit&quot;: &quot;ha&quot;,&#xd;
                                         &quot;quantity&quot;: 4.7575&#xd;
@@ -310,7 +310,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
                                     &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;appliedFor&quot;: {&#xd;
                                         &quot;unit&quot;: &quot;ha&quot;,&#xd;
                                         &quot;quantity&quot;: 2.1705&#xd;
@@ -319,7 +319,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;UPL1&quot;,&#xd;
                                     &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;appliedFor&quot;: {&#xd;
                                         &quot;unit&quot;: &quot;ha&quot;,&#xd;
                                         &quot;quantity&quot;: 2.1705&#xd;
@@ -343,7 +343,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
                                     &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;paymentRates&quot;: 1060,&#xd;
                                     &quot;annualPaymentPence&quot;: 5042,&#xd;
                                     &quot;eligible&quot;: {&#xd;
@@ -358,7 +358,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;UPL3&quot;,&#xd;
                                     &quot;description&quot;: &quot;Limited livestock grazing on moorland&quot;,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;paymentRates&quot;: 6600,&#xd;
                                     &quot;annualPaymentPence&quot;: 31399,&#xd;
                                     &quot;eligible&quot;: {&#xd;
@@ -383,7 +383,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
                                     &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;paymentRates&quot;: 1060,&#xd;
                                     &quot;annualPaymentPence&quot;: 2300,&#xd;
                                     &quot;eligible&quot;: {&#xd;
@@ -398,7 +398,7 @@ synchronized (lock) {
                                 {&#xd;
                                     &quot;code&quot;: &quot;UPL1&quot;,&#xd;
                                     &quot;description&quot;: &quot;Moderate livestock grazing on moorland&quot;,&#xd;
-                                    &quot;durationYears&quot;: 3,&#xd;
+                                    &quot;durationYears&quot;: 1,&#xd;
                                     &quot;paymentRates&quot;: 2000,&#xd;
                                     &quot;annualPaymentPence&quot;: 4341,&#xd;
                                     &quot;eligible&quot;: {&#xd;
@@ -417,7 +417,7 @@ synchronized (lock) {
                         {&#xd;
                             &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
                             &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                            &quot;durationYears&quot;: 3,&#xd;
+                            &quot;durationYears&quot;: 1,&#xd;
                             &quot;paymentRates&quot;: 27200,&#xd;
                             &quot;annualPaymentPence&quot;: 27200&#xd;
                         }&#xd;
