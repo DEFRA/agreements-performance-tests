@@ -653,7 +653,6 @@ synchronized (lock) {
             <boolProp name="Assertion.assume_success">true</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
             <stringProp name="Scope.variable">pageTitle</stringProp>
-            <stringProp name="TestPlan.comments">Response</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
