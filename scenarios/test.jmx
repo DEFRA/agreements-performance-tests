@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="agreement_test">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="gps-payments">
       <stringProp name="TestPlan.comments">Performance tests for agreement service</stringProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <DNSCacheManager guiclass="DNSCachePanel" testclass="DNSCacheManager" testname="DNS Cache Manager">
@@ -17,7 +15,7 @@
         <boolProp name="DNSCacheManager.isCustomResolver">false</boolProp>
       </DNSCacheManager>
       <hashTree/>
-      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager">
         <boolProp name="clearEachIteration">true</boolProp>
         <boolProp name="useExpires">false</boolProp>
         <boolProp name="CacheManager.controlledByThread">false</boolProp>
@@ -75,6 +73,22 @@
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc"></stringProp>
           </elementProp>
+          <elementProp name="gps_api_base_url" elementType="Argument">
+            <stringProp name="Argument.name">gps_api_base_url</stringProp>
+            <stringProp name="Argument.value">ephemeral-protected.api.dev.cdp-int.defra.cloud</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="gps_api_process_endpoint" elementType="Argument">
+            <stringProp name="Argument.name">gps_api_process_endpoint</stringProp>
+            <stringProp name="Argument.value">/grants-payment-service/api/test/process-payments/2026-07-15</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="Dev-X-API-key" elementType="Argument">
+            <stringProp name="Argument.name">Dev-X-API-key</stringProp>
+            <stringProp name="Argument.value">xvJT3INWWxfZMV8hTywcU9ySDGzweCvw</stringProp>
+            <stringProp name="Argument.desc">x-api-key</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
@@ -101,7 +115,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="setUp Thread Group">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -112,7 +126,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler">
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -123,15 +137,13 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="agreements-ui">
-        <stringProp name="ThreadGroup.num_threads">${user_count}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${ramp_up_period_seconds}</stringProp>
-        <stringProp name="ThreadGroup.duration">${duration_seconds}</stringProp>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="GPS-api">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
-        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
@@ -140,597 +152,134 @@ props.setProperty(&apos;accumulatedResponseTimeMs&apos;, &apos;0&apos;)</stringP
           <stringProp name="ConstantTimer.delay">3000</stringProp>
         </ConstantTimer>
         <hashTree/>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
-          <stringProp name="HTTPSampler.domain">grants-ui.${environment}.cdp-int.defra.cloud</stringProp>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">x-api-key</stringProp>
+              <stringProp name="Header.value">${Dev-X-API-key}</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Accept-Encoding</stringProp>
+              <stringProp name="Header.value">*</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
+          <collectionProp name="Asserion.test_strings">
+            <stringProp name="49586">200</stringProp>
+          </collectionProp>
+          <stringProp name="Assertion.custom_message"></stringProp>
+          <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          <boolProp name="Assertion.assume_success">false</boolProp>
+          <intProp name="Assertion.test_type">2</intProp>
+        </ResponseAssertion>
+        <hashTree/>
+        <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Maximum Response Time Assertion">
+          <stringProp name="DurationAssertion.duration">3000</stringProp>
+        </DurationAssertion>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /health">
+          <stringProp name="HTTPSampler.domain">ephemeral-protected.api.dev.cdp-int.defra.cloud</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/grants-payment-service/health</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-        </ConfigTestElement>
+        </HTTPSamplerProxy>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CRNs and Agreements CSV">
-          <stringProp name="filename">${csv_path}/agreements.csv</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="variableNames">crn,password,sbi,agreementNumber</stringProp>
-          <boolProp name="ignoreFirstLine">true</boolProp>
-          <stringProp name="delimiter">,</stringProp>
-          <boolProp name="quotedData">true</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-        </CSVDataSet>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /process-payments/{date}">
+          <stringProp name="HTTPSampler.domain">${gps_api_base_url}</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">${gps_api_process_endpoint}</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
         <hashTree/>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Rolling Response Time AssertionAssertion" enabled="true">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="parameters"></stringProp>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
           <stringProp name="filename"></stringProp>
-          <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="script">// config
-long maxResponseTimeMs = 3000L
-long minimumSampleSize = 10L
-
-// skip Defra ID stub requests
-if (prev.getSampleLabel().contains(&quot;Defra Id stub&quot;) || prev.getSampleLabel().contains(&quot;create agreement&quot;)) {
-	return
-}
-
-// accumulate request count and response times
-def lock = &apos;accumulationLock&apos;.intern()
-synchronized (lock) {
-	// get response time
-	long responseTime = prev.getTime()
-	log.info(&apos;Individual response time: &apos; + responseTime + &apos; ms&apos;)
-
-	// update counters
-	long accumulatedRequestCount = (props.getProperty(&apos;accumulatedRequestCount&apos;,&apos;0&apos;) as long) + 1L
-	long accumulatedResponseTimeMs = (props.getProperty(&apos;accumulatedResponseTimeMs&apos;,&apos;0&apos;) as long) + responseTime
-	props.setProperty(&apos;accumulatedRequestCount&apos;,   String.valueOf(accumulatedRequestCount))
-	props.setProperty(&apos;accumulatedResponseTimeMs&apos;, String.valueOf(accumulatedResponseTimeMs))
-
-	// calculate latest average response time
-	long averageResponseTimeMs = accumulatedResponseTimeMs / accumulatedRequestCount
-	log.info(&apos;Average response time is now: &apos; + averageResponseTimeMs + &apos; ms over &apos; + accumulatedRequestCount + &apos; requests&apos;)
-
-	// assert
-	if (accumulatedRequestCount &gt; minimumSampleSize &amp;&amp; averageResponseTimeMs &gt; maxResponseTimeMs) {
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(&apos;Average response time exceeds &apos; + maxResponseTimeMs + &apos; ms threshold&apos;)
-	}
-}
-</stringProp>
-        </JSR223Assertion>
+        </ResultCollector>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create Agreements">
-          <stringProp name="HTTPSampler.domain">${agreements_api_url}</stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">${agreements_api_endpoint}</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-        &quot;id&quot;: &quot;3a877fc7-923e-42a9-b751-6e1a0add2235&quot;,&#xd;
-        &quot;source&quot;: &quot;fg-gas-backend&quot;,&#xd;
-        &quot;specversion&quot;: &quot;1.0&quot;,&#xd;
-        &quot;datacontenttype&quot;: &quot;application/json&quot;,&#xd;
-        &quot;time&quot;: &quot;2025-11-25T15:58:27.496Z&quot;,&#xd;
-        &quot;traceparent&quot;: &quot;c335f29d2d4455947fd4047bd3353f67&quot;,&#xd;
-        &quot;type&quot;: &quot;cloud.defra.perf-test.fg-gas-backend.agreement.create&quot;,&#xd;
-        &quot;data&quot;: {&#xd;
-            &quot;clientRef&quot;: &quot;clientcoc0u82x&quot;,&#xd;
-            &quot;code&quot;: &quot;frps-private-beta&quot;,&#xd;
-            &quot;identifiers&quot;: {&#xd;
-                &quot;sbi&quot;: &quot;${sbi}&quot;,&#xd;
-                &quot;frn&quot;: &quot;frn&quot;,&#xd;
-                &quot;crn&quot;: &quot;${crn}&quot;,&#xd;
-                &quot;defraId&quot;: &quot;12345678910&quot;&#xd;
-            },&#xd;
-            &quot;answers&quot;: {&#xd;
-                &quot;rulesCalculations&quot;: {&#xd;
-                    &quot;id&quot;: 2979,&#xd;
-                    &quot;message&quot;: &quot;Application validated successfully&quot;,&#xd;
-                    &quot;valid&quot;: true,&#xd;
-                    &quot;date&quot;: &quot;2025-11-21T10:10:43.673Z&quot;&#xd;
-                },&#xd;
-                &quot;scheme&quot;: &quot;SFI&quot;,&#xd;
-                &quot;applicant&quot;: {&#xd;
-                    &quot;business&quot;: {&#xd;
-                            &quot;reference&quot;: &quot;1101091126&quot;,&#xd;
-                            &quot;mobilePhoneNumber&quot;: &quot;01234567890&quot;,&#xd;
-                            &quot;landlinePhoneNumber&quot;: &quot;01234567890&quot;,&#xd;
-                            &quot;email&quot;: &quot;PKTestingEmail@def.testing.test&quot;,&#xd;
-                            &quot;name&quot;: &quot;Texels Hire &amp; Contracting&quot;,&#xd;
-                            &quot;address&quot;: {&#xd;
-                                &quot;line1&quot;: &quot;Benbrigge House&quot;,&#xd;
-                                &quot;line2&quot;: &quot;BRIGHTON&quot;,&#xd;
-                                &quot;line3&quot;: &quot;Line 3&quot;,&#xd;
-                                &quot;line4&quot;: &quot;Line 4&quot;,&#xd;
-                                &quot;line5&quot;: &quot;Line 5&quot;,&#xd;
-                                &quot;street&quot;: &quot;BRIDGE ROAD&quot;,&#xd;
-                                &quot;city&quot;: &quot;GRIMSBY&quot;,&#xd;
-                                &quot;postalCode&quot;: &quot;DY13 0UY&quot;&#xd;
-                        }&#xd;
-                    },&#xd;
-                    &quot;customer&quot;: {&#xd;
-                        &quot;name&quot;: {&#xd;
-                            &quot;title&quot;: &quot;Mr&quot;,&#xd;
-                            &quot;first&quot;: &quot;Graham&quot;,&#xd;
-                            &quot;middle&quot;: &quot;Lisa&quot;,&#xd;
-                            &quot;last&quot;: &quot;Gilfoyle&quot;&#xd;
-                        }&#xd;
-                    }&#xd;
-                },&#xd;
-                &quot;totalAnnualPaymentPence&quot;: 70284,&#xd;
-                &quot;application&quot;: {&#xd;
-                    &quot;parcel&quot;: [&#xd;
-                        {&#xd;
-                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
-                            &quot;parcelId&quot;: &quot;7555&quot;,&#xd;
-                            &quot;area&quot;: {&#xd;
-                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                &quot;quantity&quot;: 5.2182&#xd;
-                            },&#xd;
-                            &quot;actions&quot;: [&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                                    &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    }&#xd;
-                                },&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;UPL3&quot;,&#xd;
-                                    &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    }&#xd;
-                                }&#xd;
-                            ]&#xd;
-                        },&#xd;
-                        {&#xd;
-                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
-                            &quot;parcelId&quot;: &quot;9194&quot;,&#xd;
-                            &quot;area&quot;: {&#xd;
-                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                &quot;quantity&quot;: 2.1703&#xd;
-                            },&#xd;
-                            &quot;actions&quot;: [&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                                    &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    }&#xd;
-                                },&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;UPL1&quot;,&#xd;
-                                    &quot;version&quot;: 1,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    }&#xd;
-                                }&#xd;
-                            ]&#xd;
-                        }&#xd;
-                    ],&#xd;
-                    &quot;agreement&quot;: []&#xd;
-                },&#xd;
-                &quot;payments&quot;: {&#xd;
-                    &quot;parcel&quot;: [&#xd;
-                        {&#xd;
-                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
-                            &quot;parcelId&quot;: &quot;7555&quot;,&#xd;
-                            &quot;area&quot;: {&#xd;
-                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                &quot;quantity&quot;: 5.2182&#xd;
-                            },&#xd;
-                            &quot;actions&quot;: [&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                                    &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;paymentRates&quot;: 1060,&#xd;
-                                    &quot;annualPaymentPence&quot;: 5042,&#xd;
-                                    &quot;eligible&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    },&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    }&#xd;
-                                },&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;UPL3&quot;,&#xd;
-                                    &quot;description&quot;: &quot;Limited livestock grazing on moorland&quot;,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;paymentRates&quot;: 6600,&#xd;
-                                    &quot;annualPaymentPence&quot;: 31399,&#xd;
-                                    &quot;eligible&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    },&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 4.7575&#xd;
-                                    }&#xd;
-                                }&#xd;
-                            ]&#xd;
-                        },&#xd;
-                        {&#xd;
-                            &quot;sheetId&quot;: &quot;SK0971&quot;,&#xd;
-                            &quot;parcelId&quot;: &quot;9194&quot;,&#xd;
-                            &quot;area&quot;: {&#xd;
-                                &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                &quot;quantity&quot;: 2.1703&#xd;
-                            },&#xd;
-                            &quot;actions&quot;: [&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                                    &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;paymentRates&quot;: 1060,&#xd;
-                                    &quot;annualPaymentPence&quot;: 2300,&#xd;
-                                    &quot;eligible&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    },&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    }&#xd;
-                                },&#xd;
-                                {&#xd;
-                                    &quot;code&quot;: &quot;UPL1&quot;,&#xd;
-                                    &quot;description&quot;: &quot;Moderate livestock grazing on moorland&quot;,&#xd;
-                                    &quot;durationYears&quot;: 1,&#xd;
-                                    &quot;paymentRates&quot;: 2000,&#xd;
-                                    &quot;annualPaymentPence&quot;: 4341,&#xd;
-                                    &quot;eligible&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    },&#xd;
-                                    &quot;appliedFor&quot;: {&#xd;
-                                        &quot;unit&quot;: &quot;ha&quot;,&#xd;
-                                        &quot;quantity&quot;: 2.1705&#xd;
-                                    }&#xd;
-                                }&#xd;
-                            ]&#xd;
-                        }&#xd;
-                    ],&#xd;
-                    &quot;agreement&quot;: [&#xd;
-                        {&#xd;
-                            &quot;code&quot;: &quot;CMOR1&quot;,&#xd;
-                            &quot;description&quot;: &quot;Assess moorland and produce a written record&quot;,&#xd;
-                            &quot;durationYears&quot;: 1,&#xd;
-                            &quot;paymentRates&quot;: 27200,&#xd;
-                            &quot;annualPaymentPence&quot;: 27200&#xd;
-                        }&#xd;
-                    ]&#xd;
-                }&#xd;
-            }&#xd;
-        }&#xd;
-    } </stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager to use when running locally" enabled="false">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">x-api-key</stringProp>
-                <stringProp name="Header.value"></stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Accept-Encoding</stringProp>
-                <stringProp name="Header.value">*</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">34</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Start Page">
-          <stringProp name="HTTPSampler.path">/agreement</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Defra Id stub Login Page">
-          <stringProp name="HTTPSampler.domain">${defra_id__stub_url}</stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/dcidmtest.onmicrosoft.com/oauth2/authresp</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="crn" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${crn}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">crn</stringProp>
-              </elementProp>
-              <elementProp name="password" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${password}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">password</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/review-your-offer">
-          <stringProp name="HTTPSampler.path">/agreement</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">34</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="1147766042">${sbi}</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <boolProp name="Assertion.assume_success">true</boolProp>
-            <intProp name="Assertion.test_type">2</intProp>
-            <stringProp name="Scope.variable">pageTitle</stringProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/accept-your-offer">
-          <stringProp name="HTTPSampler.path">/agreement</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="action" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">display-accept</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">action</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">34</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="1147766042">${sbi}</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <boolProp name="Assertion.assume_success">true</boolProp>
-            <intProp name="Assertion.test_type">2</intProp>
-            <stringProp name="Scope.variable">pageTitle</stringProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST agreement/offer-accepted">
-          <stringProp name="HTTPSampler.path">/agreement</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="confirm" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">confirmed</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">confirm</stringProp>
-              </elementProp>
-              <elementProp name="action" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">validate-accept-offer</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">action</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">34</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="1147766042">${sbi}</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <boolProp name="Assertion.assume_success">true</boolProp>
-            <intProp name="Assertion.test_type">2</intProp>
-            <stringProp name="Scope.variable">pageTitle</stringProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET agreement/view-agreement">
-          <stringProp name="HTTPSampler.path">/agreement/${agreementNumber}</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Status Code Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-            <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">34</intProp>
-          </ResponseAssertion>
-          <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
-            <collectionProp name="Asserion.test_strings">
-              <stringProp name="922667969">${agreementNumber}</stringProp>
-            </collectionProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <boolProp name="Assertion.assume_success">true</boolProp>
-            <intProp name="Assertion.test_type">2</intProp>
-            <stringProp name="Scope.variable">pageTitle</stringProp>
-          </ResponseAssertion>
-          <hashTree/>
-        </hashTree>
       </hashTree>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>true</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <sentBytes>true</sentBytes>
-            <url>true</url>
-            <threadCounts>true</threadCounts>
-            <idleTime>true</idleTime>
-            <connectTime>true</connectTime>
-          </value>
-        </objProp>
-        <stringProp name="filename"></stringProp>
-      </ResultCollector>
-      <hashTree/>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>true</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-            <sentBytes>true</sentBytes>
-            <url>true</url>
-            <threadCounts>true</threadCounts>
-            <idleTime>true</idleTime>
-            <connectTime>true</connectTime>
-          </value>
-        </objProp>
-        <stringProp name="filename"></stringProp>
-      </ResultCollector>
-      <hashTree/>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
