@@ -8,6 +8,5 @@ COPY user.properties .
 COPY data/ ./data/
 
 ENV S3_ENDPOINT=https://s3.eu-west-2.amazonaws.com
-ENV TEST_SCENARIO=test
 
 ENTRYPOINT [ "./entrypoint.sh" ]
