@@ -80,12 +80,6 @@
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables to run tests locally" enabled="false">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="csv_path" elementType="Argument">
-            <stringProp name="Argument.name">csv_path</stringProp>
-            <stringProp name="Argument.value"></stringProp>
-            <stringProp name="Argument.desc"></stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="agreements_api_url" elementType="Argument">
             <stringProp name="Argument.name">agreements_api_url</stringProp>
             <stringProp name="Argument.value">ephemeral-protected.api.perf-test.cdp-int.defra.cloud</stringProp>
@@ -97,6 +91,11 @@
             <stringProp name="Argument.value">/farming-grants-agreements-api/api/test/queue-message</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
+          <elementProp name="csv_path" elementType="Argument">
+            <stringProp name="Argument.name">csv_path</stringProp>
+            <stringProp name="Argument.value">/Users/nitinmali/workspace/farming/agreements-performance-tests/data</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
