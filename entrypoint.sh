@@ -55,6 +55,20 @@ echo "wmp-test exit code: ${WMP_EXIT}"
 # Publish the results into S3 so they can be displayed in the CDP Portal
 if [ -n "$RESULTS_OUTPUT_S3_PATH" ]; then
   if [ -f "${FRPS_REPORTS}/index.html" ] || [ -f "${WMP_REPORTS}/index.html" ]; then
+    # Create a root index.html linking to both sub-reports so the CDP portal can find it
+    cat > "${JM_REPORTS}/index.html" <<EOF
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Agreements Performance Test Results</title></head>
+<body>
+<h1>Agreements Performance Test Results</h1>
+<ul>
+  <li><a href="frps/index.html">FRPS Report</a></li>
+  <li><a href="wmp/index.html">WMP Report</a></li>
+</ul>
+</body>
+</html>
+EOF
     aws --endpoint-url=$S3_ENDPOINT s3 rm "$RESULTS_OUTPUT_S3_PATH" --recursive
     aws --endpoint-url=$S3_ENDPOINT s3 cp "$FRPS_REPORTFILE" "$RESULTS_OUTPUT_S3_PATH/$FRPS_REPORTFILE"
     aws --endpoint-url=$S3_ENDPOINT s3 cp "$WMP_REPORTFILE" "$RESULTS_OUTPUT_S3_PATH/$WMP_REPORTFILE"
