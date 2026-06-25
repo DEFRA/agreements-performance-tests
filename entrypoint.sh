@@ -32,6 +32,11 @@ WMP_LOGFILE=${JM_LOGS}/perftest-${WMP_SCENARIO}.log
 
 mkdir -p ${FRPS_REPORTS} ${WMP_REPORTS}
 
+echo "=== DEBUG: entrypoint version: wmp-first-sequential ==="
+echo "=== DEBUG: FRPS scenario: ${FRPS_SCENARIOFILE} ==="
+echo "=== DEBUG: WMP scenario: ${WMP_SCENARIOFILE} ==="
+echo "=== DEBUG: Reports dir: ${JM_REPORTS} ==="
+
 # Run WMP first so it gets fresh JVM resources (FRPS resource usage can starve WMP if run second)
 echo "Starting WMP test..."
 jmeter -n -t ${WMP_SCENARIOFILE} -e -l "${WMP_REPORTFILE}" -o ${WMP_REPORTS} -j ${WMP_LOGFILE} -f -Jenv="${ENVIRONMENT}" -Jcsv_path="${JM_DATA}" -Juser_count="${USER_COUNT}" -Jramp_up_period_seconds="${RAMP_UP_PERIOD_SECONDS}" -Jduration_seconds="${DURATION_SECONDS}"
